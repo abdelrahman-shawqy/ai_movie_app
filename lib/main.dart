@@ -1,3 +1,5 @@
+import 'package:ai_movie_app/core/routing/app_routes.dart';
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
 
+      initialRoute: Routes.splashScreen,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
