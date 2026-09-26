@@ -1,3 +1,9 @@
 class AppImages{
   static const String splashIcon = "assets/images/splash_icon.png";
+  static const String firstScreenOnBoarding = "assets/images/first_onboarding_screen.png";
+  static const String secondOnboardingScreen = "assets/images/second_onboarding_screen.png";
+  static const String thirdOnboardingScreen = "assets/images/third_onboarding_screen_.png";
+  static const String durationOnboardingScreen = "assets/images/duration_onboaerding_screen.png";
+  static const String ratingOnboardingScreen = "assets/images/rating_onboarding_screen.png";
+  static const String arrowRightIcon = "assets/images/arrow_right_icon.png";
 }

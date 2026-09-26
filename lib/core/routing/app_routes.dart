@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/routing/route.dart';
+import 'package:ai_movie_app/features/onboarding/screens/first%20screen.dart';
 import 'package:ai_movie_app/features/onboarding/screens/onboarding__screen.dart';
 import 'package:ai_movie_app/features/splash_screen/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
