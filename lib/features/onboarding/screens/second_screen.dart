@@ -1,5 +1,5 @@
 import 'package:ai_movie_app/core/constants/app_images.dart';
-import 'package:ai_movie_app/core/constants/app_text_styles.dart';
+import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -29,9 +29,9 @@ class SecondScreen extends StatelessWidget {
         ),
         SizedBox(height: 14),
         Text(
-            'Semper in cursus magna et eu varius nunc \n adipiscing. Elementum justo, laoreet id sem \n semper parturient. ',
-            style: AppTextStyle.h5Medium,
-            textAlign: TextAlign.center
+          'Semper in cursus magna et eu varius nunc \n adipiscing. Elementum justo, laoreet id sem \n semper parturient. ',
+          style: AppTextStyle.h5Medium500S14,
+          textAlign: TextAlign.center,
         ),
       ],
     );
