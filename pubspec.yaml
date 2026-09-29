@@ -20,6 +20,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   dotted_border: ^3.1.0
+  bloc: ^9.2.1
+  flutter_bloc: ^9.1.1
+  pinput: ^6.0.2
 
 
 dev_dependencies:

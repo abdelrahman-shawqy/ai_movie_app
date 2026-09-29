@@ -6,4 +6,8 @@ class AppImages{
   static const String durationOnboardingScreen = "assets/images/duration_onboaerding_screen.png";
   static const String ratingOnboardingScreen = "assets/images/rating_onboarding_screen.png";
   static const String arrowRightIcon = "assets/images/arrow_right_icon.png";
+  static const String logoSignUpLogin = "assets/images/logo_signup_login.png";
+  static const String googleIcon = "assets/images/google_Icon.png";
+  static const String facebookIcon = "assets/images/facebook_Icon.png";
+  static const String iconBack = "assets/images/icon_back.png";
 }
