@@ -55,7 +55,9 @@ class LoginScreen extends StatelessWidget {
                       },
                         child: Text("Forgot Password?",style: AppTextStyle.H4Semibold500S14,))),
               sizedBoxFun(screenHeight: screenHeight*0.050,),
-              MainButton(label: 'Login',navigate: (){},),
+              MainButton(label: 'Login',navigate: (){
+                Navigator.pushReplacementNamed(context, Routes.homeMainScreen);
+              },),
 
             ],
           ),

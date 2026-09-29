@@ -10,4 +10,8 @@ class AppImages{
   static const String googleIcon = "assets/images/google_Icon.png";
   static const String facebookIcon = "assets/images/facebook_Icon.png";
   static const String iconBack = "assets/images/icon_back.png";
+  static const String downloadIcon = "assets/images/download_icon.png";
+  static const String homeIcon = "assets/images/home_icon.png";
+  static const String personIcon = "assets/images/person_icon.png";
+  static const String searchIcon = "assets/images/search_icon.png";
 }

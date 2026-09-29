@@ -78,5 +78,21 @@ class AppTextStyle{
     letterSpacing:0.12,
 
   );
+  static TextStyle get  H4Semibold600S16White  => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height:2,
+    letterSpacing:0.12,
+
+  );
+  static TextStyle get  H6Medium500S12primaryBlueAccent => GoogleFonts.montserrat(
+    color: AppColors.primaryBlueAccent,
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    height:1,
+    letterSpacing:0.12,
+
+  );
 
 }
