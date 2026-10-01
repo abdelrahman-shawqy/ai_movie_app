@@ -1,5 +1,9 @@
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
+import 'package:ai_movie_app/features/home/widgets/custom_default_tab_controller.dart';
+import 'package:ai_movie_app/features/home/widgets/film_view.dart';
+import 'package:ai_movie_app/features/home/widgets/search_text_field.dart';
+import 'package:ai_movie_app/features/home/widgets/user_welcome.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
@@ -7,58 +11,69 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height ;
-    final screenWidth = MediaQuery.of(context).size.width ;
-    return  Scaffold(
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
       backgroundColor: AppColors.mainColor,
-      body:Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding:  EdgeInsets.only(top:screenHeight*0.052,left: screenWidth*0.034,right: screenWidth*0.024,bottom: screenHeight*0.032 ),
-              child: Container(
-                color: Colors.red,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: screenWidth*0.06,
-                      backgroundColor: Colors.white,
-                    ),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16,),
-                      child: Text.rich(
-                          TextSpan(
-                              children: [
-                                TextSpan(
-                                    text: 'Hello, Smith\n',
-                                    style: AppTextStyle.H4Semibold600S16White
-                                ),
-                                TextSpan(
-                                    text: 'Let’s stream your favorite movie',
-                                    style: AppTextStyle.H6Medium500S12
-                                )
-                              ]
-                          )
+            children: [
+              UserWelcome(),
+              SearchTextField(),
+
+              Container(height: 174, color: Colors.white),
+              sizedBoxFun(screenHeight: 24),
+
+              Align(
+                alignment: AlignmentGeometry.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Categories',
+                        style: AppTextStyle.H4Semibold600S16White,
                       ),
-                    ),
-
-                  ],
+                      sizedBoxFun(screenHeight: screenHeight * 0.010),
+                      CustomDefaultTabController(),
+                      sizedBoxFun(screenHeight: screenHeight * 0.024),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          right: screenHeight * 0.024,
+                          bottom: screenHeight * 0.016,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Most popular',
+                              style: AppTextStyle.H4Semibold600S16White,
+                            ),
+                            Text(
+                              'See All',
+                              style: AppTextStyle.H4Semibold500S14,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FilmView(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ) ,
+      ),
     );
   }
-  sizedBoxFun({double? screenHeight,double?screenWidth}){
-    return  SizedBox(
-      height: screenHeight,
-      width: screenWidth,
-    );
+
+  sizedBoxFun({double? screenHeight, double? screenWidth}) {
+    return SizedBox(height: screenHeight, width: screenWidth);
   }
 }

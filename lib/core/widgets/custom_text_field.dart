@@ -14,7 +14,6 @@ class CustomTextField extends StatelessWidget {
       padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.020),
       child: SizedBox(
         height: screenHeight*0.065,
-
         child: TextField(
           cursorColor: AppColors.whiteGrey,
           controller:emailController ,

@@ -14,4 +14,5 @@ class AppImages{
   static const String homeIcon = "assets/images/home_icon.png";
   static const String personIcon = "assets/images/person_icon.png";
   static const String searchIcon = "assets/images/search_icon.png";
+  static const String layerSearchIcon = "assets/images/layer_search_icon.png";
 }
