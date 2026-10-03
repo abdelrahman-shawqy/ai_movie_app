@@ -5,8 +5,7 @@ import 'package:ai_movie_app/features/auth/forgot_password/screens/verification_
 import 'package:ai_movie_app/features/auth/login/screens/login_screen.dart';
 import 'package:ai_movie_app/features/auth/login_or_signup/screens/login_or_signup_screen.dart';
 import 'package:ai_movie_app/features/auth/sign_up/screens/sign_up_screen.dart';
-import 'package:ai_movie_app/features/home/screens/home_main_screen.dart';
-import 'package:ai_movie_app/features/onboarding/screens/first%20screen.dart';
+import 'package:ai_movie_app/features/home/presentation/screens/home_main_screen.dart';
 import 'package:ai_movie_app/features/onboarding/screens/onboarding__screen.dart';
 import 'package:ai_movie_app/features/splash_screen/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
