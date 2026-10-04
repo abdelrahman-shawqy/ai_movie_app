@@ -9,16 +9,24 @@ part 'movie_list_state.dart';
 class MovieListCubit extends Cubit<MovieListState> {
   MovieListCubit(this.homeUseCase) : super(MovieListLoading());
   final HomeUseCase homeUseCase;
-    Future<void>getMovieList() async {
+
+  //
+
+
+  Future<void> getMovieList() async {
+
     emit(MovieListLoading());
     var movieList = await homeUseCase.callMovieList();
-    movieList.fold(
-      (error) => emit(MovieListError(error.errorMessage)),
-      (success){
-        final MovieList all = MovieList(name: 'All',id: 1);
-        final List<MovieList>allMovieList = [all,...success.genres];
-        return emit(MovieListSuccess(allMovieList));
-      },
-    );
+    movieList.fold((error) => emit(MovieListError(error.errorMessage)), (
+      success,
+    ) {
+      //
+      print('getMovieList ####### ');
+      final MovieList all = MovieList(name: 'All', id: 1);
+      final List<MovieList> allMovieList = [all, ...success.genres];
+      return emit(MovieListSuccess(allMovieList));
+    });
   }
+
+
 }

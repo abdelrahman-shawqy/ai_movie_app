@@ -1,6 +1,7 @@
 import 'package:ai_movie_app/core/dependency%20_injection/di.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
+import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/movie_list/movie_list_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/custom_default_tab_controller.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/film_view.dart';
@@ -18,8 +19,15 @@ class HomeTab extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.mainColor,
-      body: BlocProvider(
+      body: MultiBlocProvider(
+  providers: [
+    BlocProvider(
   create: (context) =>getIt<MovieListCubit>()..getMovieList(),
+),
+    BlocProvider(
+      create: (context) =>getIt<MostPopularMoviesCubit>()..getMostPopularMovies(1),
+    ),
+  ],
   child: Container(
         child: SingleChildScrollView(
           child: Column(

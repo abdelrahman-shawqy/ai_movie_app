@@ -1,5 +1,4 @@
 import 'package:ai_movie_app/core/network/api_helper.dart';
-import 'package:ai_movie_app/core/network/constant.dart';
 import 'package:ai_movie_app/features/home/data/remote_data_source/remote_home_data_source.dart';
 import 'package:dio/dio.dart';
 
@@ -9,7 +8,7 @@ class RemoteHomeDataSourceImpl implements RemoteHomeDataSource{
   @override
   Future<Response<dynamic>> getMovieListResponse() async{
     try{
-      var movieListDataResponse = await apiHelper.getData(endPoint:'/3/genre/movie/list',queryParameters: {'api_key':apiKey});
+      var movieListDataResponse = await apiHelper.getData(endPoint:'/genre/movie/list');
       return movieListDataResponse ;
     }on DioException catch (e){
       print('Exception from RemoteHomeDataSourceImpl ${e.toString()}  ');
@@ -17,6 +16,24 @@ class RemoteHomeDataSourceImpl implements RemoteHomeDataSource{
       rethrow ;
     }
   }
+
+  @override
+  Future<Response<dynamic>> getMostPopularMoviesResponse({required int movieListId}) async{
+    if(movieListId==1){
+      return  await apiHelper.getData(endPoint: '/discover/movie',queryParameters: {
+        'sort_by':'popularity.desc',
+      });
+
+    }
+    else{
+      return  await apiHelper.getData(endPoint: '/discover/movie',queryParameters: {
+        'sort_by':'popularity.desc',
+        'with_genres' :'$movieListId'
+      });
+    }
+
+  }
+
 
 
 }
