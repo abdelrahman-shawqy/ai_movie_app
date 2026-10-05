@@ -56,7 +56,7 @@ class CustomDefaultTabController extends StatelessWidget {
               ),
             );
           case MovieListError():
-            return Center(child: Text(state.errorMessage));
+            return Center(child: Text(state.errorMessage,style: AppTextStyle.h5Medium500S14));
         }
 
     },);
