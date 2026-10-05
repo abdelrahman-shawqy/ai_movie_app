@@ -7,6 +7,7 @@ import 'package:ai_movie_app/features/home/domain/remote_repository/remote_home_
 import 'package:ai_movie_app/features/home/domain/use_case/home_use_case.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/movie_list/movie_list_cubit.dart';
+import 'package:ai_movie_app/features/home/presentation/controller/trending_movies/trending_movies_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -30,5 +31,6 @@ getIt.registerLazySingleton<RemoteHomeRepository>(() => RemoteHomeRepositoryImpl
 getIt.registerLazySingleton<HomeUseCase>(() => HomeUseCase(getIt<RemoteHomeRepository>()),);
 getIt.registerLazySingleton<MovieListCubit>(() => MovieListCubit(getIt<HomeUseCase>()),);
 getIt.registerLazySingleton<MostPopularMoviesCubit>(() => MostPopularMoviesCubit(getIt<HomeUseCase>()),);
+getIt.registerLazySingleton<TrendingMoviesCubit>(() => TrendingMoviesCubit(getIt<HomeUseCase>()),);
 
 }

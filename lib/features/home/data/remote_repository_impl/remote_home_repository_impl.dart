@@ -1,6 +1,7 @@
 import 'package:ai_movie_app/features/home/data/models/most_popular_movies_model.dart';
 import 'package:ai_movie_app/features/home/data/models/movie_list_model.dart';
 import 'package:ai_movie_app/core/error/failure.dart';
+import 'package:ai_movie_app/features/home/data/models/trending_movies_model.dart';
 import 'package:ai_movie_app/features/home/data/remote_data_source/remote_home_data_source.dart';
 import 'package:ai_movie_app/features/home/domain/remote_repository/remote_home_repository.dart';
 import 'package:dio/dio.dart';
@@ -38,6 +39,21 @@ class RemoteHomeRepositoryImpl implements RemoteHomeRepository{
       return Left(Failure(e.message??'Something went wrong From RemoteHomeRepositoryImpl ## getMostPopularMoviesData ## '));
     }
   }
+
+  @override
+  Future<Either<Failure, TrendingMoviesModel>> getTrendingMoviesData() async {
+    try {
+      var trendingMoviesResponse= await  homeDataSource.getTrendingMoviesResponse() ;
+      var trendingMoviesData = TrendingMoviesModel.fromJson(trendingMoviesResponse.data);
+      return Right(trendingMoviesData) ;
+    }on DioException catch(e){
+      print('## There Is an Exception From RemoteHomeRepositoryImpl  ## getTrendingMoviesData ## == ${e.toString()}') ;
+      print('## There Is an Exception From RemoteHomeRepositoryImpl ## getTrendingMoviesData ## == message ${e.message}') ;
+      return Left(Failure(e.message ??'Something went wrong From RemoteHomeRepositoryImpl ## getTrendingMoviesData ## '));
+    }
+  }
+
+
 
 
 

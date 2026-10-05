@@ -3,9 +3,11 @@ import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/movie_list/movie_list_cubit.dart';
+import 'package:ai_movie_app/features/home/presentation/controller/trending_movies/trending_movies_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/custom_default_tab_controller.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/film_view.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/search_text_field.dart';
+import 'package:ai_movie_app/features/home/presentation/widgets/trending_home_widget_view.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/user_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +29,7 @@ class HomeTab extends StatelessWidget {
     BlocProvider(
       create: (context) =>getIt<MostPopularMoviesCubit>()..getMostPopularMovies(1),
     ),
+    BlocProvider(create: (context)=>getIt<TrendingMoviesCubit>()..getTrendingMovies()),
   ],
   child: Container(
         child: SingleChildScrollView(
@@ -37,7 +40,7 @@ class HomeTab extends StatelessWidget {
             children: [
               UserWelcome(),
               SearchTextField(),
-              Container(height: 174, color: Colors.white),
+              TrendingHomeWidgetView(),
               sizedBoxFun(screenHeight: 24),
 
               Align(

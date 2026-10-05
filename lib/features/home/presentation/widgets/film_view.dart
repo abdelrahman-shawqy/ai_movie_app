@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
+import 'package:ai_movie_app/core/utils/api_utils.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,6 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final blocMostPopularMoviesCubit = context.read<MostPopularMoviesCubit>();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return BlocBuilder<MostPopularMoviesCubit, MostPopularMoviesState>(
@@ -72,7 +72,7 @@ class Card extends StatelessWidget {
                               borderRadius: BorderRadiusGeometry.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))),
                         ),
                         errorWidget: (context, url, error) => Text('${error}'),
-                        imageUrl: blocMostPopularMoviesCubit.getImage(state.resultsMostPopularMoviesModel[listViewIndex].posterPath,),
+                        imageUrl: ApiUtils.getPosterImage(state.resultsMostPopularMoviesModel[listViewIndex].posterPath,),
                         placeholder: (context, url) => Center(child: CircularProgressIndicator(color: Colors.white,)),
                       ),
 
@@ -126,7 +126,7 @@ class Card extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       //
-                      '${blocMostPopularMoviesCubit.getGenreName(state.resultsMostPopularMoviesModel[listViewIndex].genreIds[0])}',
+                      '${ApiUtils.getGenreName(state.resultsMostPopularMoviesModel[listViewIndex].genreIds[0])}',
                       style: AppTextStyle.h7Medium500s10GrayColor,
                       overflow: TextOverflow.ellipsis,
                     ),
