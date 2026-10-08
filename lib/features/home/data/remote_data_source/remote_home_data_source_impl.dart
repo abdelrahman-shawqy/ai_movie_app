@@ -36,7 +36,7 @@ class RemoteHomeDataSourceImpl implements RemoteHomeDataSource{
 
   @override
   Future<Response<dynamic>> getTrendingMoviesResponse() async {
-    return await apiHelper.getData(endPoint: '/trending/movie/day');
+    return await apiHelper.getData(endPoint: '/trending/movie/week');
   }
 
 
