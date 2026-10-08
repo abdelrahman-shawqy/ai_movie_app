@@ -22,70 +22,75 @@ class HomeTab extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.mainColor,
       body: MultiBlocProvider(
-  providers: [
-    BlocProvider(
-  create: (context) =>getIt<MovieListCubit>()..getMovieList(),
-),
-    BlocProvider(
-      create: (context) =>getIt<MostPopularMoviesCubit>()..getMostPopularMovies(1),
-    ),
-    BlocProvider(create: (context)=>getIt<TrendingMoviesCubit>()..getTrendingMovies()),
-  ],
-  child: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<MovieListCubit>()..getMovieList(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                getIt<MostPopularMoviesCubit>()..getMostPopularMovies(1),
+          ),
+          BlocProvider(
+            create: (context) =>
+                getIt<TrendingMoviesCubit>()..getTrendingMovies(),
+          ),
+        ],
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
 
-            children: [
-              UserWelcome(),
-              SearchTextField(),
-              TrendingHomeWidgetView(),
-              sizedBoxFun(screenHeight: 24),
+              children: [
+                UserWelcome(),
+                SearchTextField(),
+                TrendingHomeWidgetView(),
+                sizedBoxFun(screenHeight: screenHeight * 0.0019),
 
-              Align(
-                alignment: AlignmentGeometry.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Categories',
-                        style: AppTextStyle.H4Semibold600S16White,
-                      ),
-                      sizedBoxFun(screenHeight: screenHeight * 0.010),
-                      CustomDefaultTabController(),
-                      sizedBoxFun(screenHeight: screenHeight * 0.024),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          right: screenHeight * 0.024,
-                          bottom: screenHeight * 0.016,
+                Align(
+                  alignment: AlignmentGeometry.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Categories',
+                          style: AppTextStyle.H4Semibold600S16White,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Most popular',
-                              style: AppTextStyle.H4Semibold600S16White,
-                            ),
-                            Text(
-                              'See All',
-                              style: AppTextStyle.H4Semibold500S14,
-                            ),
-                          ],
+                        sizedBoxFun(screenHeight: screenHeight * 0.010),
+                        CustomDefaultTabController(),
+                        sizedBoxFun(screenHeight: screenHeight * 0.024),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            right: screenHeight * 0.024,
+                            bottom: screenHeight * 0.016,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Most popular',
+                                style: AppTextStyle.H4Semibold600S16White,
+                              ),
+                              Text(
+                                'See All',
+                                style: AppTextStyle.H4Semibold500S14,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      FilmView(),
-                    ],
+                        FilmView(),
+                        sizedBoxFun(screenHeight: 5),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-),
     );
   }
 
