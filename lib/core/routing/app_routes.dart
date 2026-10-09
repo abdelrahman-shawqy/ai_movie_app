@@ -20,13 +20,13 @@ class AppRoutes{
       case Routes.loginOrSignUpScreen :
         return MaterialPageRoute(builder: (_)=>const LoginOrSignupScreen());
       case Routes.loginScreen :
-        return MaterialPageRoute(builder: (_)=> const LoginScreen());
+        return MaterialPageRoute(builder: (_)=> const  LoginScreen());
       case Routes.signUpScreen :
-        return MaterialPageRoute(builder: (_)=> const SignUpScreen());
+        return MaterialPageRoute(builder: (_)=> const  SignUpScreen());
       case Routes.resetPassword :
         return MaterialPageRoute(builder: (_)=> const ResetPasswordScreen());
 case Routes.verificationScreen :
-        return MaterialPageRoute(builder: (_)=>  VerificationScreen());
+        return MaterialPageRoute(builder: (_)=>const   VerificationScreen());
       case Routes.createNewPassword :
         return MaterialPageRoute(builder: (_)=>const CreateNewPassword());
       case Routes.homeMainScreen :

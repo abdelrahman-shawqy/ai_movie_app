@@ -31,7 +31,7 @@ class LoginOrSignupScreen extends StatelessWidget {
                 SizedBox(
                   height: screenHeight*0.075,
                 ),
-                MainButton(label: "Sign Up",navigate:() => Navigator.pushNamed(context,Routes.signUpScreen) ,),
+                MainButton(label: "Sign Up",onPressed:() => Navigator.pushNamed(context,Routes.signUpScreen) ,),
                 SizedBox(
                   height: screenHeight*0.044,
                 ),

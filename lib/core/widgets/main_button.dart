@@ -3,20 +3,17 @@ import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {
-    const MainButton({super.key,required this.label,required this.navigate});
+    const MainButton({super.key,required this.label,required this.onPressed});
     final String label ;
-    final Function navigate  ;
+    final VoidCallback onPressed  ;
     @override
     Widget build(BuildContext context) {
       final screenWidth = MediaQuery.of(context).size.width ;
       final screenHeight = MediaQuery.of(context).size.height ;
-
       return Padding(
         padding: EdgeInsets.symmetric(horizontal:screenWidth*0.050),
         child: InkWell(
-          onTap: (){
-            navigate();
-          },
+          onTap: onPressed ,
           child: Container(
             width: screenWidth,
             height: screenHeight*0.065,
