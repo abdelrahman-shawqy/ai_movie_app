@@ -7,9 +7,25 @@ import 'package:ai_movie_app/core/widgets/main_button.dart';
 import 'package:ai_movie_app/core/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 
-class CreateNewPassword extends StatelessWidget {
+class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
 
+  @override
+  State<CreateNewPassword> createState() => _CreateNewPasswordState();
+}
+
+class _CreateNewPasswordState extends State<CreateNewPassword> {
+  late TextEditingController passWordController ;
+  @override
+  void initState() {
+    super.initState();
+    passWordController =  TextEditingController();
+  }
+  @override
+  void dispose() {
+    passWordController .dispose() ;
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height ;
@@ -40,12 +56,16 @@ class CreateNewPassword extends StatelessWidget {
               Text('Enter your new password',style: AppTextStyle.H6Medium500S12,textAlign: TextAlign.center,),
               sizedBoxFun(screenHeight: screenHeight*0.070,),
 
-              PasswordTextField(labelText: 'Password',),
+              PasswordTextField(
+                passWordController: passWordController,
+                labelText: 'Password',validator: (s){return ' ' ;},),
               sizedBoxFun(screenHeight: screenHeight*0.030,),
-              PasswordTextField(labelText: 'Confirm Password',),
+              PasswordTextField(
+                passWordController : passWordController,
+                labelText: 'Confirm Password',validator: (s){return ' ' ;},),
               sizedBoxFun(screenHeight: screenHeight*0.008,),
               sizedBoxFun(screenHeight: screenHeight*0.050,),
-              MainButton(label: 'Reset',navigate: (){
+              MainButton(label: 'Reset',onPressed: (){
                 Navigator.pushReplacementNamed(context, Routes.loginScreen);
               },),
 
@@ -55,6 +75,7 @@ class CreateNewPassword extends StatelessWidget {
       ),
     );
   }
+
   sizedBoxFun({double? screenHeight,double?screenWidth}){
     return  SizedBox(
       height: screenHeight,
