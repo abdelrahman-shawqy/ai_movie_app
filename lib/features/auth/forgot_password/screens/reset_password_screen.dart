@@ -5,8 +5,25 @@ import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/core/widgets/custom_text_field.dart';
 import 'package:ai_movie_app/core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
-class ResetPasswordScreen extends StatelessWidget {
+class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
+
+  @override
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+}
+
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  late TextEditingController emailController ;
+  @override
+  void initState() {
+    super.initState();
+    emailController =  TextEditingController();
+  }
+  @override
+  void dispose() {
+    emailController .dispose() ;
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height ;
@@ -38,10 +55,12 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 height: screenHeight*0.070,
               ),
-              CustomTextField(labelText: "Email Address",),
+              CustomTextField(
+                controller:emailController ,
+                labelText: "Email Address",validator: (s){return ' ' ;},),
               sizedBoxFun(screenHeight: screenHeight*0.030,),
               sizedBoxFun(screenHeight: screenHeight*0.050,),
-              MainButton(label: 'Next',navigate: (){
+              MainButton(label: 'Next',onPressed: (){
                 Navigator.pushNamed(context, Routes.verificationScreen);
               },),
 
@@ -52,6 +71,7 @@ class ResetPasswordScreen extends StatelessWidget {
     );
 
   }
+
   sizedBoxFun({double? screenHeight,double?screenWidth}){
     return  SizedBox(
       height: screenHeight,

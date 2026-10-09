@@ -6,10 +6,25 @@ import 'package:ai_movie_app/core/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-class VerificationScreen extends StatelessWidget {
-   VerificationScreen({super.key});
-   final TextEditingController controller = TextEditingController();
+class VerificationScreen extends StatefulWidget {
+   const VerificationScreen({super.key});
 
+  @override
+  State<VerificationScreen> createState() => _VerificationScreenState();
+}
+
+class _VerificationScreenState extends State<VerificationScreen> {
+   late  TextEditingController controller ;
+   @override
+   void initState() {
+     super.initState();
+     controller =  TextEditingController();
+   }
+   @override
+   void dispose() {
+     controller .dispose() ;
+     super.dispose();
+   }
    @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height ;
@@ -81,7 +96,7 @@ class VerificationScreen extends StatelessWidget {
                 focusedPinTheme:focusedPinTheme ,
               ),
               sizedBoxFun(screenHeight: screenHeight*0.050,),
-              MainButton(label: 'Continue',navigate: (){
+              MainButton(label: 'Continue',onPressed: (){
                 Navigator.pushReplacementNamed(context, Routes.createNewPassword);
               },),
 
@@ -91,6 +106,7 @@ class VerificationScreen extends StatelessWidget {
       ) ,
     );
   }
+
   sizedBoxFun({double? screenHeight,double?screenWidth}){
     return  SizedBox(
       height: screenHeight,

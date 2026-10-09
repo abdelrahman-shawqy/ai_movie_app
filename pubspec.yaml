@@ -28,6 +28,8 @@ dependencies:
   fpdart: ^1.2.0
   equatable: ^3.0.0
   cached_network_image: ^3.4.1
+  firebase_core: ^4.15.0
+  firebase_auth: ^6.7.0
 
 
 dev_dependencies:
