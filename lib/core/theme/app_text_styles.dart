@@ -102,5 +102,12 @@ class AppTextStyle{
     letterSpacing:0.12,
 
   );
+  static TextStyle get  h7Medium500s10WhiteColor => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    height:1,
+    letterSpacing:0.12,
 
+  );
 }

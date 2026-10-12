@@ -16,4 +16,8 @@ class AppImages{
   static const String searchIcon = "assets/images/search_icon.png";
   static const String layerSearchIcon = "assets/images/layer_search_icon.png";
   static const String starRate = "assets/images/star_rate.png";
+  static const String calendar = "assets/images/calendar.png";
+  static const String clock = "assets/images/clock.png";
+  static const String pG13 = "assets/images/pG_13.png";
+  static const String movieCategoryIcon = "assets/images/movie_category_icon.png";
 }
