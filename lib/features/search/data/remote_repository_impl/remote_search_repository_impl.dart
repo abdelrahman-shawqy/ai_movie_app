@@ -1,0 +1,24 @@
+import 'package:ai_movie_app/core/error/failure.dart';
+import 'package:ai_movie_app/features/search/data/models/search_by_movie_model.dart';
+import 'package:ai_movie_app/features/search/data/remote_data_source/remote_search_data_source.dart';
+import 'package:ai_movie_app/features/search/domain/remote_repository/remote_search_repository.dart';
+import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
+
+class RemoteSearchRepositoryImpl extends RemoteSearchRepository{
+  RemoteSearchRepositoryImpl(this.remoteSearchDataSource);
+  final RemoteSearchDataSource remoteSearchDataSource ;
+  @override
+  Future<Either<Failure,SearchByMovieModel>>getSearchByMovieResponse(String searchWord )async{
+    try{
+      var response = await remoteSearchDataSource.getSearchByMovieResponse(searchWord);
+      var data =  SearchByMovieModel.fromJson(response.data);
+
+      return Right(data) ;
+    }on DioException catch(e){
+      print('Exception from RemoteSearchRepositoryImpl ${e.toString()}  ');
+      print('Exception from RemoteSearchRepositoryImpl ,the error message is  ${e.message}  ');
+      return Left(Failure(e.message ?? 'Something get wrong '));
+    }
+  }
+}

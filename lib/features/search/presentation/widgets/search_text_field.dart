@@ -4,17 +4,23 @@ import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchTextFieldSearch extends StatefulWidget {
-   const SearchTextFieldSearch({super.key,required this.controller,required this.isTypingFun});
-  final  TextEditingController controller;
-   final Function isTypingFun ;
+   const SearchTextFieldSearch({super.key,required this.isSearchActiveFun,required this.onSearchTextChanged});
+   final Function isSearchActiveFun ;
+   final ValueChanged<String> onSearchTextChanged ;
   @override
   State<SearchTextFieldSearch> createState() => _SearchTextFieldSearchState();
 }
 class _SearchTextFieldSearchState extends State<SearchTextFieldSearch> {
-  bool isTyping =false ;
+  bool isSearchActive =false ;
+  late  TextEditingController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TextEditingController();
+  }
   @override
   void dispose() {
-    isTyping =false ;
+    controller.dispose();
     super.dispose();
   }
   @override
@@ -32,14 +38,15 @@ class _SearchTextFieldSearchState extends State<SearchTextFieldSearch> {
         children: [
           Expanded(
             child: TextField(
+              onChanged: widget.onSearchTextChanged,
               onTap: (){
                 setState(() {
-                  widget.isTypingFun(isTyping = true) ;
-                  print('########## $isTyping');
-
+                  if(isSearchActive==true)return ;
+                  widget.isSearchActiveFun(isSearchActive = true) ;
+                  print('########## TextField onTap  isSearchActive = $isSearchActive');
                 });
               },
-              controller: widget.controller,
+              controller: controller,
               cursorColor: Colors.white,
               style: AppTextStyle.h5Medium500S14,
               decoration: InputDecoration(
@@ -63,18 +70,20 @@ class _SearchTextFieldSearchState extends State<SearchTextFieldSearch> {
           ),
           SizedBox(width: 9,),
           Visibility(
-            visible:isTyping ,
+            visible:isSearchActive ,
               child: GestureDetector(
                 onTap: (){
                   setState(() {
-                    widget.isTypingFun(isTyping = false) ;
-                    print('########## $isTyping');
+                    widget.isSearchActiveFun(isSearchActive = false) ;
+                    print('########## isSearchActive Cancel TextField= $isSearchActive');
                     FocusScope.of(context).unfocus();
+                    controller.clear();
+                    widget.onSearchTextChanged('');
                   });
                 },
                   child: Container(
                       height:screenHeight*0.045,
-                      width:screenWidth*0.14,
+                      width:screenWidth*0.12,
     child: Center(child: Text('Cancel',style: AppTextStyle.H6Medium500S12,))))),
         ],
       ),

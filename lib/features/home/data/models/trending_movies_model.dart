@@ -1,15 +1,16 @@
 class TrendingMoviesModel {
-  final int page;
-  final List<TrendingMovieResultModel> results;
-  final int totalPages;
-  final int totalResults;
-
   TrendingMoviesModel({
     required this.page,
     required this.results,
     required this.totalPages,
     required this.totalResults,
   });
+  final int page;
+  final List<TrendingMovieResultModel> results;
+  final int totalPages;
+  final int totalResults;
+
+
 
   factory TrendingMoviesModel.fromJson(Map<String, dynamic> json) {
     return TrendingMoviesModel(

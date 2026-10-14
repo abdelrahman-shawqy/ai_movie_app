@@ -17,26 +17,21 @@ class SearchTab extends StatefulWidget {
 }
 
 class _SearchTabState extends State<SearchTab> with SingleTickerProviderStateMixin {
-  late  TextEditingController controller;
   late AnimationController animationController ;
   late Animation<Offset> positionController ;
-   bool isTyping = false ;
-
+   bool isSearchActive = false ;
+   String searchWord ='';
   @override
   void initState() {
     animationController = AnimationController(vsync: this,duration: Duration(seconds: 15));
     positionController = Tween<Offset>(begin: Offset(0, 0.04),end:Offset.zero).animate(animationController);
-    controller = TextEditingController();
     super.initState();
   }
-
   @override
   void dispose() {
-    controller.dispose();
     animationController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -50,13 +45,13 @@ class _SearchTabState extends State<SearchTab> with SingleTickerProviderStateMix
           children: [
             sizedBoxFun(screenHeight: screenHeight * 0.060),
             SearchTextFieldSearch(
-              isTypingFun: updateTyping,
-              controller: controller,
+              onSearchTextChanged:onSearchTextChanged ,
+              isSearchActiveFun: updateTyping,
             ),
             Expanded(
               child: AnimatedSwitcher(
                     duration: Duration(seconds: 1),
-                    child: isTyping?SearchResult():DefaultSearchTap()),
+                    child: isSearchActive?SearchResult(searchWord:searchWord,):DefaultSearchTap()),
             ),
           ],
         ),
@@ -69,8 +64,14 @@ class _SearchTabState extends State<SearchTab> with SingleTickerProviderStateMix
   }
   void updateTyping(bool typing) {
     setState(() {
-      isTyping = typing;
+      isSearchActive = typing;
     });
+  }
+  void  onSearchTextChanged(String text){
+   setState(() {
+     searchWord = text ;
+     print('########### from onSearchTextChanged SearchTab = $searchWord');
+   });
   }
 
 

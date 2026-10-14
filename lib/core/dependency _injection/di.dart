@@ -8,8 +8,15 @@ import 'package:ai_movie_app/features/home/domain/use_case/home_use_case.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/movie_list/movie_list_cubit.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/trending_movies/trending_movies_cubit.dart';
+import 'package:ai_movie_app/features/search/data/remote_data_source/remote_search_data_source.dart';
+import 'package:ai_movie_app/features/search/data/remote_data_source/remote_search_data_source_impl.dart';
+import 'package:ai_movie_app/features/search/data/remote_repository_impl/remote_search_repository_impl.dart';
+import 'package:ai_movie_app/features/search/domain/remote_repository/remote_search_repository.dart';
+import 'package:ai_movie_app/features/search/domain/use_case/search_use_case.dart';
+import 'package:ai_movie_app/features/search/presentation/controllers/search_by_movie/search_by_movie_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
 
 final getIt = GetIt.instance;
 void configureDependencies (){
@@ -32,5 +39,10 @@ getIt.registerLazySingleton<HomeUseCase>(() => HomeUseCase(getIt<RemoteHomeRepos
 getIt.registerLazySingleton<MovieListCubit>(() => MovieListCubit(getIt<HomeUseCase>()),);
 getIt.registerLazySingleton<MostPopularMoviesCubit>(() => MostPopularMoviesCubit(getIt<HomeUseCase>()),);
 getIt.registerLazySingleton<TrendingMoviesCubit>(() => TrendingMoviesCubit(getIt<HomeUseCase>()),);
+
+getIt.registerLazySingleton<RemoteSearchDataSource>(()=>RemoteSearchDataSourceImpl(getIt<ApiHelper>()));
+getIt.registerLazySingleton<RemoteSearchRepository>(()=>RemoteSearchRepositoryImpl(getIt<RemoteSearchDataSource>()));
+getIt.registerLazySingleton<SearchUseCase>(()=>SearchUseCase(getIt<RemoteSearchRepository>()));
+getIt.registerFactory<SearchByMovieCubit>(()=>SearchByMovieCubit(getIt<SearchUseCase>()));
 
 }
