@@ -72,34 +72,37 @@ class Card extends StatelessWidget {
           case TrendingMoviesLoading():
            return Center(child: CircularProgressIndicator(color: Colors.white,),);
           case TrendingMoviesSuccess():
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Stack(
-                alignment: AlignmentGeometry.bottomLeft,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(16),
-                    child: Image.network(
-                      width:double.infinity ,
-                      height:double.infinity ,
-                      ApiUtils.getBackDropImage(state.trendingMovieResultModel[pageViewIndex].backdropPath),fit: BoxFit.fill,),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16,bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start  ,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: 250,
-                          child: Text(state.trendingMovieResultModel[pageViewIndex].title,style: AppTextStyle.H4Semibold600S16White,overflow:TextOverflow.ellipsis,maxLines: 2,),
-                        ),
-                        SizedBox(height: 4,),
-                        Text('On ${state.trendingMovieResultModel[pageViewIndex].releaseDate}',style: AppTextStyle.H6Medium500S12,)
-                      ],
+            return GestureDetector(
+              onTap: (){},
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Stack(
+                  alignment: AlignmentGeometry.bottomLeft,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(16),
+                      child: Image.network(
+                        width:double.infinity ,
+                        height:double.infinity ,
+                        ApiUtils.getBackDropImage(state.trendingMovieResultModel[pageViewIndex].backdropPath),fit: BoxFit.fill,),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16,bottom: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start  ,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 250,
+                            child: Text(state.trendingMovieResultModel[pageViewIndex].title,style: AppTextStyle.H4Semibold600S16White,overflow:TextOverflow.ellipsis,maxLines: 2,),
+                          ),
+                          SizedBox(height: 4,),
+                          Text('On ${state.trendingMovieResultModel[pageViewIndex].releaseDate}',style: AppTextStyle.H6Medium500S12,)
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           case TrendingMoviesError():

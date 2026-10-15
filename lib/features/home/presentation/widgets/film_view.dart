@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:ai_movie_app/core/constants/app_images.dart';
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/core/utils/api_utils.dart';
@@ -49,90 +50,98 @@ class Card extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           case MostPopularMoviesSuccess():
             final movie = state.resultsMostPopularMoviesModel[listViewIndex];
-            return Container(
-              width: 155,
-              decoration: BoxDecoration(
-                color: AppColors.PrimarySoft,
-                borderRadius: BorderRadiusGeometry.circular(8),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Stack(
-                    alignment: AlignmentGeometry.topRight,
-                    children: [
-                      CachedNetworkImage(
-                        height: screenHeight*0.210,
-                        width: screenWidth * 0.350,
-                        imageBuilder: (context, imageProvider)=>Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(image: imageProvider,
-                              fit: BoxFit.cover,
-                            ),
-                              borderRadius: BorderRadiusGeometry.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))),
-                        ),
-                        errorWidget: (context, url, error) => Text('${error}'),
-                        imageUrl: ApiUtils.getPosterImage(movie.posterPath,),
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator(color: Colors.white,)),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8, top: 4),
-                        child: ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(8),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                            child: Container(
-                              height: 24,
-                              width: 55,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Color(
-                                  0xff25283652,
-                                ).withValues(alpha: 0.32),
+            return GestureDetector(
+              onTap: (){
+                print('333333333333333333333333333 show');
+                Navigator.pushNamed(context, Routes.movieDetailsScreen,arguments:{
+                  'title':  ApiUtils.formatTitleForMovieResult(movie.title)
+                });
+              },
+              child: Container(
+                width: 155,
+                decoration: BoxDecoration(
+                  color: AppColors.PrimarySoft,
+                  borderRadius: BorderRadiusGeometry.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Stack(
+                      alignment: AlignmentGeometry.topRight,
+                      children: [
+                        CachedNetworkImage(
+                          height: screenHeight*0.210,
+                          width: screenWidth * 0.350,
+                          imageBuilder: (context, imageProvider)=>Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(image: imageProvider,
+                                fit: BoxFit.cover,
                               ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Image.asset(AppImages.starRate),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      '${movie.voteAverage.toStringAsFixed(1)}',
-                                      style: TextStyle(
-                                        color: Color(0xffFF8700),
+                                borderRadius: BorderRadiusGeometry.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))),
+                          ),
+                          errorWidget: (context, url, error) => Text('${error}'),
+                          imageUrl: ApiUtils.getPosterImage(movie.posterPath,),
+                          placeholder: (context, url) => Center(child: CircularProgressIndicator(color: Colors.white,)),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8, top: 4),
+                          child: ClipRRect(
+                            borderRadius: BorderRadiusGeometry.circular(8),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                              child: Container(
+                                height: 24,
+                                width: 55,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Color(
+                                    0xff25283652,
+                                  ).withValues(alpha: 0.32),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(AppImages.starRate),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        '${movie.voteAverage.toStringAsFixed(1)}',
+                                        style: TextStyle(
+                                          color: Color(0xffFF8700),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
+                      ],
+                    ),
+                    SizedBox(height: 10),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 8),
-                    child: Text(
-                      '${movie.title}',
-                      style: AppTextStyle.H4Semibold600S16White,
-                      overflow: TextOverflow.ellipsis,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: Text(
+                        '${movie.title}',
+                        style: AppTextStyle.H4Semibold600S16White,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Text(
-                      //
-                      '${ApiUtils.getGenreName(movie.genreIds)}',
-                      style: AppTextStyle.h7Medium500s10GrayColor,
-                      overflow: TextOverflow.ellipsis,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        //
+                        '${ApiUtils.getGenreName(movie.genreIds)}',
+                        style: AppTextStyle.h7Medium500s10GrayColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           case MostPopularMoviesError():
