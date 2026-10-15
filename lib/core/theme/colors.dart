@@ -10,4 +10,5 @@ class AppColors{
   static const Color faceBook =Color(0xff4267B2);
   static const Color whiteGrey =Color(0xffEBEBEF);
   static const Color PrimarySoft =Color(0xff252836);
+  static const Color secondaryOrange =Color(0xffFF8700);
 }

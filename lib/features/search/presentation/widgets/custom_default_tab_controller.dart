@@ -5,8 +5,8 @@ import 'package:ai_movie_app/features/home/presentation/controller/movie_list/mo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomDefaultTabControllerSearch extends StatelessWidget {
-   const CustomDefaultTabControllerSearch({super.key});
+class CustomDefaultTabControllerForSearchScreen extends StatelessWidget {
+   const CustomDefaultTabControllerForSearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

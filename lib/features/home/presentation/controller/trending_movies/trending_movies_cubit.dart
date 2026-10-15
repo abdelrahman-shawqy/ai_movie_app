@@ -11,7 +11,11 @@ class TrendingMoviesCubit extends Cubit<TrendingMoviesState> {
   final HomeUseCase homeUseCase ;
   Future<void>getTrendingMovies()async{
     emit(TrendingMoviesLoading());
+    if (isClosed) return;
+
     var trendingMovies =await homeUseCase.callTrendingMoviesData();
+    if (isClosed) return;
+
     trendingMovies.fold((error){
       emit(TrendingMoviesError(error.errorMessage));
     }, (success){

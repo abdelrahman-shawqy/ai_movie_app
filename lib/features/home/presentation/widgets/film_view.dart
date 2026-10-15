@@ -48,6 +48,7 @@ class Card extends StatelessWidget {
           case MostPopularMoviesLoading():
             return Center(child: CircularProgressIndicator());
           case MostPopularMoviesSuccess():
+            final movie = state.resultsMostPopularMoviesModel[listViewIndex];
             return Container(
               width: 155,
               decoration: BoxDecoration(
@@ -72,7 +73,7 @@ class Card extends StatelessWidget {
                               borderRadius: BorderRadiusGeometry.only(topRight: Radius.circular(12),topLeft: Radius.circular(12))),
                         ),
                         errorWidget: (context, url, error) => Text('${error}'),
-                        imageUrl: ApiUtils.getPosterImage(state.resultsMostPopularMoviesModel[listViewIndex].posterPath,),
+                        imageUrl: ApiUtils.getPosterImage(movie.posterPath,),
                         placeholder: (context, url) => Center(child: CircularProgressIndicator(color: Colors.white,)),
                       ),
 
@@ -98,7 +99,7 @@ class Card extends StatelessWidget {
                                     Image.asset(AppImages.starRate),
                                     SizedBox(width: 5),
                                     Text(
-                                      '${state.resultsMostPopularMoviesModel[listViewIndex].voteAverage.toStringAsFixed(1)}',
+                                      '${movie.voteAverage.toStringAsFixed(1)}',
                                       style: TextStyle(
                                         color: Color(0xffFF8700),
                                       ),
@@ -117,7 +118,7 @@ class Card extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 8),
                     child: Text(
-                      '${state.resultsMostPopularMoviesModel[listViewIndex].title}',
+                      '${movie.title}',
                       style: AppTextStyle.H4Semibold600S16White,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -126,7 +127,7 @@ class Card extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
                       //
-                      '${ApiUtils.getGenreName(state.resultsMostPopularMoviesModel[listViewIndex].genreIds[0])}',
+                      '${ApiUtils.getGenreName(movie.genreIds)}',
                       style: AppTextStyle.h7Medium500s10GrayColor,
                       overflow: TextOverflow.ellipsis,
                     ),

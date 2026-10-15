@@ -102,5 +102,29 @@ class AppTextStyle{
     letterSpacing:0.12,
 
   );
+  static TextStyle get  h7Medium500s10WhiteColor => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    height:1,
+    letterSpacing:0.12,
 
+  );
+
+  static TextStyle get  h6SemiBold600s12WhiteColor => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    height:1,
+    letterSpacing:0.12,
+
+  );
+  static TextStyle get  h6SemiBold600s12GrayColorColor => GoogleFonts.montserrat(
+    color: AppColors.grayColor,
+    fontWeight: FontWeight.w600,
+    fontSize: 12,
+    height:1,
+    letterSpacing:0.12,
+
+  );
 }

@@ -7,7 +7,11 @@ class ApiUtils {
     final String baseUrlImage  = "https://image.tmdb.org/t/p/w1280" ;
     return '${baseUrlImage}${posterPath}' ;
   }
-  static String getGenreName(int catId){
+  static String getGenreName(List<int> genreIds){
+
+    if(genreIds.isEmpty){
+      return 'Unavailable';
+    }
     final  Map<int,String>genreMap = {
       28 : "Action",
       12 : "Abenteuer" ,
@@ -29,8 +33,25 @@ class ApiUtils {
       10752 : "Kriegsfilm" ,
       37 : "Western"
     };
-    return genreMap[catId] ?? "Unavailable" ;
+    return genreMap[genreIds.first] ?? "Unavailable" ;
 
   }
-
+  static String formatTitleForMovieResult(String title){
+    if(title.isEmpty){
+      return "Unavailable" ;
+    }
+    return title ;
+  }
+  static String formatVoteAverageForMovieResult(num voteAverage){
+    if(voteAverage<=1){
+      return '0.0' ;
+    }
+    return voteAverage.toStringAsFixed(1);
+  }
+  static String formatReleaseDateWithYearForMovieResult(String releaseDate){
+    if(releaseDate.length<=4){
+      return "Unavailable" ;
+    }
+    return releaseDate.substring(0,4) ;
+  }
 }
