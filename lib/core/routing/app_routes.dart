@@ -37,6 +37,10 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) =>  MovieDetailsScreen(
               title: argument['title'] as String ,
+              voteAverage: argument['voteAverage'] as String ,
+              releaseDate: argument['releaseDate'] as String ,
+              posterPath: argument['posterPath'] as String ,
+
             ));
 
       default:

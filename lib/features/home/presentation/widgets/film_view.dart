@@ -54,7 +54,10 @@ class Card extends StatelessWidget {
               onTap: (){
                 print('333333333333333333333333333 show');
                 Navigator.pushNamed(context, Routes.movieDetailsScreen,arguments:{
-                  'title':  ApiUtils.formatTitleForMovieResult(movie.title)
+                  'title':  ApiUtils.formatTitleForMovieResult(movie.title),
+                  'voteAverage':ApiUtils.formatVoteAverageForMovieResult(movie.voteAverage),
+                  'releaseDate' : ApiUtils.formatReleaseDateWithYearForMovieResult(movie.releaseDate),
+                  'posterPath' : ApiUtils.getPosterImage(movie.posterPath)
                 });
               },
               child: Container(

@@ -2,8 +2,8 @@ import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class RatingWidget extends StatelessWidget {
-  const RatingWidget({super.key});
-
+  const RatingWidget({super.key,required this.voteAverage});
+  final String voteAverage ;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -18,11 +18,11 @@ class RatingWidget extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children:  [
             Icon(Icons.star, color: AppColors.secondaryOrange, size: 20),
             SizedBox(width: 6),
             Text(
-              '55',
+              voteAverage,
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 color:  AppColors.secondaryOrange,

@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 
 
 class MovieDetailsScreen extends StatelessWidget {
-  const MovieDetailsScreen({super.key,required this.title});
-
+  const MovieDetailsScreen({super.key,required this.title,required this.voteAverage,required this.releaseDate,required this.posterPath});
 final String title ;
-
+final String voteAverage ;
+final String releaseDate ;
+final String posterPath ;
   static const Color bgColor = Color(0xFF1C1B2E);
   static const Color placeholderColor = Color(0xFF2B2940);
   static const Color orange = Color(0xFFFF8A00);
@@ -26,7 +27,7 @@ final String title ;
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CardMovieDetails(title: title,),
+            CardMovieDetails(title: title,voteAverage: voteAverage,releaseDate: releaseDate,posterPath: posterPath,),
             // Story Line
             const SizedBox(height: 28),
             const Padding(
