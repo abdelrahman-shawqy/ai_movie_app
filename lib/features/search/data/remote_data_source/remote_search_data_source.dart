@@ -4,4 +4,5 @@ abstract class RemoteSearchDataSource {
 
 
   Future<Response<dynamic>> getSearchByMovieResponse(String searchWord) ;
+  Future<Response<dynamic>>getSearchByActorResponse(String searchWord);
 }

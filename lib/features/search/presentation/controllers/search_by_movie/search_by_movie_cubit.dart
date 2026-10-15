@@ -24,22 +24,22 @@ class SearchByMovieCubit extends Cubit<SearchByMovieState> {
     print('###################### getResultSearchByMovieModel f1');
      if(searchWord.isEmpty||searchWord.trim().isEmpty){
        print('###################### getResultSearchByMovieModel f2');
-       if (isClosed) return;
-       emit(SearchByMovieInitial());
+
      }
     else{
        print('###################### getResultSearchByMovieModel f3');
-       if (isClosed) return;
        emit(SearchByMovieLoading());
-    print('###################### getResultSearchByMovieModel f4');
+       if (isClosed) return;
+
+       print('###################### getResultSearchByMovieModel f4');
     var resultSearchByMovieModel =await searchUseCase.callSearchByMovieResponse(searchWord);
-    resultSearchByMovieModel.fold((error){
-      if (isClosed) return;
+       if (isClosed) return;
+
+       resultSearchByMovieModel.fold((error){
     emit(SearchByMovieError(error.errorMessage));
     print('###################### getResultSearchByMovieModel f5');
 
     }, (success){
-      if (isClosed) return;
     emit(SearchByMovieSuccess(success.results));
     print('###################### getResultSearchByMovieModel f6');
 

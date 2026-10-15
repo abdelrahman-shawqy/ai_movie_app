@@ -15,10 +15,26 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource{
       );
     } on DioException catch (e) {
       print(
-        '##### There are error from RemoteSearchDataSourceImpl as error object = ${e.error.toString()}',
+        '##### There are error from RemoteSearchDataSourceImpl / getSearchByMovieResponse as error object = ${e.error.toString()}',
       );
       print(
-        '##### There are error from RemoteSearchDataSourceImpl as error message =  ${e.message}',
+        '##### There are error from RemoteSearchDataSourceImpl / getSearchByMovieResponse as error message =  ${e.message}',
+      );
+      rethrow;
+    }
+  }
+  @override
+  Future<Response<dynamic>>getSearchByActorResponse(String searchWord)async{
+    try{
+      return await apiHelper.getData(endPoint: '/search/person',queryParameters: {
+        'query' : searchWord
+      });
+    }on DioException catch(e){
+      print(
+        '##### There are error from RemoteSearchDataSourceImpl / getSearchByActorResponse error object = ${e.error.toString()}',
+      );
+      print(
+        '##### There are error from RemoteSearchDataSourceImpl / getSearchByActorResponse error message =  ${e.message}',
       );
       rethrow;
     }

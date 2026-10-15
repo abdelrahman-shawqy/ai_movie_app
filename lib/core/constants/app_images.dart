@@ -22,4 +22,5 @@ class AppImages{
   static const String movieCategoryIcon = "assets/images/movie_category_icon.png";
   static const String unavailableErrorImage = "assets/images/unavailable_error_image.png";
   static const String searchCanNotBeFound = "assets/images/search_can_not_be_found.png";
+  static const String profilePic = "assets/images/profile_pic.jpg";
 }

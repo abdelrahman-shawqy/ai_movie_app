@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/error/failure.dart';
+import 'package:ai_movie_app/features/search/data/models/search_by_actor_model.dart';
 import 'package:ai_movie_app/features/search/data/models/search_by_movie_model.dart';
 import 'package:ai_movie_app/features/search/data/remote_data_source/remote_search_data_source.dart';
 import 'package:ai_movie_app/features/search/domain/remote_repository/remote_search_repository.dart';
@@ -16,9 +17,21 @@ class RemoteSearchRepositoryImpl extends RemoteSearchRepository{
 
       return Right(data) ;
     }on DioException catch(e){
-      print('Exception from RemoteSearchRepositoryImpl ${e.toString()}  ');
-      print('Exception from RemoteSearchRepositoryImpl ,the error message is  ${e.message}  ');
-      return Left(Failure(e.message ?? 'Something get wrong '));
+      print('Exception from RemoteSearchRepositoryImpl getSearchByMovieResponse ${e.toString()}  ');
+      print('Exception from RemoteSearchRepositoryImpl getSearchByMovieResponse,the error message is  ${e.message}  ');
+      return Left(Failure(e.message ?? 'Something get wrong getSearchByMovieResponse'));
+    }
+  }
+  @override
+  Future<Either<Failure,SearchByActorModel>>getSearchByActorResponse(String searchWord )async{
+    try{
+      var response =await  remoteSearchDataSource.getSearchByActorResponse(searchWord);
+      var searchByActorData = SearchByActorModel.fromJson(response.data);
+      return Right(searchByActorData) ;
+    }on DioException catch(e){
+      print('Exception from RemoteSearchRepositoryImpl getSearchByActorResponse = ${e.toString()}  ');
+      print('Exception from RemoteSearchRepositoryImpl getSearchByActorResponse ,the error message is  ${e.message}  ');
+      return Left(Failure(e.message ?? 'Something get wrong getSearchByActorResponse'));
     }
   }
 }

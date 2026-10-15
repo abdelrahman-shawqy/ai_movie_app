@@ -11,14 +11,15 @@ class MostPopularMoviesCubit extends Cubit<MostPopularMoviesState> {
   final HomeUseCase homeUseCase ;
   Future<void>getMostPopularMovies(int movieListId)async {
     print(' ### CUBIT RECEIVED ID = $movieListId');
-
     emit(MostPopularMoviesLoading());
+    if (isClosed) return;
+
     var mostPopularMovies =await homeUseCase.callMostPopularMoviesData(movieListId);
+    if (isClosed) return;
     mostPopularMovies.fold((error){
       emit(MostPopularMoviesError(error.errorMessage));
     }, (success){
       print('getMostPopularMovies ####### ');
-
       emit(MostPopularMoviesSuccess(success.results));
     });
   }

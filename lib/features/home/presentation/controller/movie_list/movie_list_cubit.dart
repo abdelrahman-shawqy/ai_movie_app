@@ -16,7 +16,11 @@ class MovieListCubit extends Cubit<MovieListState> {
   Future<void> getMovieList() async {
 
     emit(MovieListLoading());
+    if (isClosed) return;
+
     var movieList = await homeUseCase.callMovieList();
+    if (isClosed) return;
+
     movieList.fold((error) => emit(MovieListError(error.errorMessage)), (
       success,
     ) {

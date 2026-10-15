@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/dependency%20_injection/di.dart';
+import 'package:ai_movie_app/features/search/presentation/controllers/search_by_actor/search_by_actor_cubit.dart';
 import 'package:ai_movie_app/features/search/presentation/controllers/search_by_movie/search_by_movie_cubit.dart';
 import 'package:ai_movie_app/features/search/presentation/screens/search_actor_result.dart';
 import 'package:ai_movie_app/features/search/presentation/screens/search_movie_result.dart';
@@ -15,31 +16,46 @@ class SearchResult extends StatefulWidget {
 class _SearchResultState extends State<SearchResult> {
   SearchType resultType =SearchType.movies ;
   late SearchByMovieCubit searchByMovieCubit ;
+  late SearchByActorCubit searchByActorCubit ;
+  late var value ;
   @override
   void initState() {
     super.initState();
     searchByMovieCubit=getIt<SearchByMovieCubit>();
+    searchByActorCubit =getIt<SearchByActorCubit>();
     searchByMovieCubit.onSearchQueryChanged(widget.searchWord);
+    searchByActorCubit.onSearchQueryChanged(widget.searchWord);
+    value = searchByMovieCubit ;
   }
   @override
   void didUpdateWidget(covariant SearchResult oldWidget) {
     super.didUpdateWidget(oldWidget);
     if(oldWidget.searchWord!=widget.searchWord){
       searchByMovieCubit.onSearchQueryChanged(widget.searchWord);
-
     }
+    if(oldWidget.searchWord!=widget.searchWord){
+      searchByActorCubit.onSearchQueryChanged(widget.searchWord);
+    }
+
 
   }
 
   @override
   void dispose() {
     searchByMovieCubit.close();
+    searchByActorCubit.close();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
     print('######## SearchResult the screen is rebild depend on searchWord');
-    return BlocProvider.value(value: searchByMovieCubit,child: Container(
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SearchByMovieCubit>.value(value: searchByMovieCubit),
+        BlocProvider<SearchByActorCubit>.value(value: searchByActorCubit),
+      ],
+      child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -54,6 +70,7 @@ class _SearchResultState extends State<SearchResult> {
             ),
             Expanded(child:resultType==SearchType.movies?SearchMovieResult(searchWord: widget.searchWord,) : SearchActorResult(searchWord: widget.searchWord,)),
           ],
-        )),);
+        )),
+    );
   }
 }

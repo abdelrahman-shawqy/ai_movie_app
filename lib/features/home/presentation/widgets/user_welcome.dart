@@ -1,3 +1,4 @@
+import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,9 +19,9 @@ class UserWelcome extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: screenWidth * 0.06,
-            backgroundColor: Colors.white,
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(38),
+            child: Image.asset(AppImages.profilePic,height:screenHeight *0.050,width:screenHeight*0.050,fit: BoxFit.cover,),
           ),
           Padding(
             padding: EdgeInsets.only(left: screenWidth * 0.035),
