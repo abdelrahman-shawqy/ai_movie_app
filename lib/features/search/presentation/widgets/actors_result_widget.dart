@@ -2,6 +2,7 @@ import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/core/utils/api_utils.dart';
+import 'package:ai_movie_app/features/search/presentation/controllers/person_credits/person_credits_cubit.dart';
 import 'package:ai_movie_app/features/search/presentation/controllers/search_by_actor/search_by_actor_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class PresentActorResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var personCreditsCubit = context.watch<PersonCreditsCubit>();
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return BlocBuilder<SearchByActorCubit, SearchByActorState>(
@@ -22,7 +24,7 @@ class PresentActorResultWidget extends StatelessWidget {
           case SearchByActorLoading():
             return searchByActorLoading();
           case SearchByActorSuccess():
-            return searchByActorSuccess(state, screenWidth);
+            return searchByActorSuccess(state, screenWidth,personCreditsCubit);
           case SearchByActorError():
             return searchByActorError(state);
         }
@@ -38,15 +40,20 @@ class PresentActorResultWidget extends StatelessWidget {
     return Center(child: CircularProgressIndicator(color: Colors.white));
   }
 
-  Widget searchByActorSuccess(SearchByActorSuccess state, double screenWidth) {
+  Widget searchByActorSuccess(SearchByActorSuccess state, double screenWidth,PersonCreditsCubit personCreditsCubit) {
     var movie = state.searchByActorList;
     return movie.isEmpty?Center(child: Text('Not Found',style: AppTextStyle.H4Semibold600S16White,)) :  ListView.separated(
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return ActorsResultWidget(
-          fName:ApiUtils.formatTitleForMovieResult(movie[index].name) ,
-          indexList: index,
-          imageUrl: ApiUtils.getPosterImage(movie[index].profilePath??''),
+        return GestureDetector(
+          onTap: (){
+            personCreditsCubit.getPersonCredits((movie[index].id).toString());
+          },
+          child: ActorsResultWidget(
+            fName:ApiUtils.formatTitleForMovieResult(movie[index].name) ,
+            indexList: index,
+            imageUrl: ApiUtils.getPosterImage(movie[index].profilePath??''),
+          ),
         );
       },
       separatorBuilder: (context, index) =>
@@ -66,17 +73,15 @@ class PresentActorResultWidget extends StatelessWidget {
 }
 
 class ActorsResultWidget extends StatelessWidget {
-  const ActorsResultWidget({
+    const ActorsResultWidget({
     super.key,
     required this.indexList,
     required this.imageUrl,
     required this.fName,
+
   });
-
   final int indexList;
-
   final String imageUrl;
-
   final String fName;
 
   @override
@@ -114,7 +119,7 @@ class ActorsResultWidget extends StatelessWidget {
                 style: AppTextStyle.h6SemiBold600s12WhiteColor,
               ),
               TextSpan(
-                text: 'Wilson',
+                text: '',
                 style: AppTextStyle.h6SemiBold600s12GrayColorColor,
               ),
             ],

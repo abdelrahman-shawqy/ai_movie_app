@@ -39,4 +39,18 @@ class RemoteSearchDataSourceImpl extends RemoteSearchDataSource{
       rethrow;
     }
   }
+  @override
+  Future<Response<dynamic>>getPersonCreditsResponse(String personId)async{
+    try{
+      return await apiHelper.getData(endPoint: '/person/${personId}/combined_credits');
+    }on DioException catch(e){
+      print(
+        '##### There are error from RemoteSearchDataSourceImpl / getPersonCreditsResponse error object = ${e.error.toString()}',
+      );
+      print(
+        '##### There are error from RemoteSearchDataSourceImpl / getPersonCreditsResponse error message =  ${e.message}',
+      );
+      rethrow;
+    }
+  }
 }

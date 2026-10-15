@@ -67,7 +67,7 @@ class _SearchTabState extends State<SearchTab> with SingleTickerProviderStateMix
       isSearchActive = typing;
     });
   }
-  void  onSearchTextChanged(String text){
+  void onSearchTextChanged(String text){
    setState(() {
      searchWord = text ;
      print('########### from onSearchTextChanged SearchTab = $searchWord');

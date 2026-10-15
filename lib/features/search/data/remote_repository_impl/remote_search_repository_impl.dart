@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/error/failure.dart';
+import 'package:ai_movie_app/features/search/data/models/person_credits_model.dart';
 import 'package:ai_movie_app/features/search/data/models/search_by_actor_model.dart';
 import 'package:ai_movie_app/features/search/data/models/search_by_movie_model.dart';
 import 'package:ai_movie_app/features/search/data/remote_data_source/remote_search_data_source.dart';
@@ -34,4 +35,17 @@ class RemoteSearchRepositoryImpl extends RemoteSearchRepository{
       return Left(Failure(e.message ?? 'Something get wrong getSearchByActorResponse'));
     }
   }
+  @override
+  Future<Either<Failure,PersonCreditsResponse>>getPersonCreditsResponse(String personId )async{
+    try{
+      var response =await  remoteSearchDataSource.getPersonCreditsResponse(personId);
+      var personCreditsData = PersonCreditsResponse.fromJson(response.data);
+      return Right(personCreditsData) ;
+    }on DioException catch(e){
+      print('Exception from RemoteSearchRepositoryImpl getPersonCreditsResponse = ${e.toString()}  ');
+      print('Exception from RemoteSearchRepositoryImpl getPersonCreditsResponse ,the error message is  ${e.message}  ');
+      return Left(Failure(e.message ?? 'Something get wrong getPersonCreditsResponse'));
+    }
+  }
+
 }

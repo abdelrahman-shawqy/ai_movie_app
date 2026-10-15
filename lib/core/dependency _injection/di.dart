@@ -13,6 +13,7 @@ import 'package:ai_movie_app/features/search/data/remote_data_source/remote_sear
 import 'package:ai_movie_app/features/search/data/remote_repository_impl/remote_search_repository_impl.dart';
 import 'package:ai_movie_app/features/search/domain/remote_repository/remote_search_repository.dart';
 import 'package:ai_movie_app/features/search/domain/use_case/search_use_case.dart';
+import 'package:ai_movie_app/features/search/presentation/controllers/person_credits/person_credits_cubit.dart';
 import 'package:ai_movie_app/features/search/presentation/controllers/search_by_actor/search_by_actor_cubit.dart';
 import 'package:ai_movie_app/features/search/presentation/controllers/search_by_movie/search_by_movie_cubit.dart';
 import 'package:dio/dio.dart';
@@ -46,5 +47,6 @@ getIt.registerLazySingleton<RemoteSearchRepository>(()=>RemoteSearchRepositoryIm
 getIt.registerLazySingleton<SearchUseCase>(()=>SearchUseCase(getIt<RemoteSearchRepository>()));
 getIt.registerFactory<SearchByMovieCubit>(()=>SearchByMovieCubit(getIt<SearchUseCase>()));
 getIt.registerFactory<SearchByActorCubit>(()=>SearchByActorCubit(getIt<SearchUseCase>()));
+getIt.registerFactory<PersonCreditsCubit>(()=>PersonCreditsCubit(getIt<SearchUseCase>()));
 
 }
