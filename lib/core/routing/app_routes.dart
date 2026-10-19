@@ -40,6 +40,8 @@ class AppRoutes {
               voteAverage: argument['voteAverage'] as String ,
               releaseDate: argument['releaseDate'] as String ,
               posterPath: argument['posterPath'] as String ,
+              overview: argument['overview'] as String ,
+              movieId: argument['movieId'] as int ,
 
             ));
 

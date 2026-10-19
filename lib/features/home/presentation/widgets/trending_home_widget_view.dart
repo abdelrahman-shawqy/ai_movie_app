@@ -1,3 +1,4 @@
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/utils/api_utils.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/trending_movies/trending_movies_cubit.dart';
@@ -14,13 +15,18 @@ class TrendingHomeWidgetView extends StatefulWidget {
 }
 
 class _TrendingHomeWidgetViewState extends State<TrendingHomeWidgetView> {
-  final controller = PageController();
+  late PageController controller = PageController();
   int index = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    controller = PageController();
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -72,8 +78,18 @@ class Card extends StatelessWidget {
           case TrendingMoviesLoading():
            return Center(child: CircularProgressIndicator(color: Colors.white,),);
           case TrendingMoviesSuccess():
+           var trendingList= state.trendingMovieResultModel[pageViewIndex] ;
             return GestureDetector(
-              onTap: (){},
+              onTap: (){
+                Navigator.pushNamed(context, Routes.movieDetailsScreen,arguments:{
+                  'title':  ApiUtils.formatTitleForMovieResult(trendingList.title),
+                  'voteAverage':ApiUtils.formatVoteAverageForMovieResult(trendingList.voteAverage),
+                  'releaseDate' : ApiUtils.formatReleaseDateWithYearForMovieResult(trendingList.releaseDate),
+                  'posterPath' : ApiUtils.getPosterImage(trendingList.posterPath),
+                  'overview' : ApiUtils.formatTitleForMovieResult(trendingList.overview),
+                  'movieId' : trendingList.id
+                });
+              },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Stack(
@@ -84,7 +100,7 @@ class Card extends StatelessWidget {
                       child: Image.network(
                         width:double.infinity ,
                         height:double.infinity ,
-                        ApiUtils.getBackDropImage(state.trendingMovieResultModel[pageViewIndex].backdropPath),fit: BoxFit.fill,),
+                        ApiUtils.getBackDropImage(trendingList.backdropPath),fit: BoxFit.fill,),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 16,bottom: 16),
@@ -94,10 +110,10 @@ class Card extends StatelessWidget {
                         children: [
                           Container(
                             width: 250,
-                            child: Text(state.trendingMovieResultModel[pageViewIndex].title,style: AppTextStyle.H4Semibold600S16White,overflow:TextOverflow.ellipsis,maxLines: 2,),
+                            child: Text(trendingList.title,style: AppTextStyle.H4Semibold600S16White,overflow:TextOverflow.ellipsis,maxLines: 2,),
                           ),
                           SizedBox(height: 4,),
-                          Text('On ${state.trendingMovieResultModel[pageViewIndex].releaseDate}',style: AppTextStyle.H6Medium500S12,)
+                          Text('On ${trendingList.releaseDate}',style: AppTextStyle.H6Medium500S12,)
                         ],
                       ),
                     ),

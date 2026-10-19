@@ -15,13 +15,11 @@ class FilmView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
       height: screenHeight * 0.280,
       width: double.infinity,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        //shrinkWrap: true,
         itemBuilder: (context, index) => Card(listViewIndex: index),
         separatorBuilder: (context, index) => sizedBoxFun(screenWidth: 12),
         itemCount: 10,
@@ -52,12 +50,15 @@ class Card extends StatelessWidget {
             final movie = state.resultsMostPopularMoviesModel[listViewIndex];
             return GestureDetector(
               onTap: (){
+
                 print('333333333333333333333333333 show');
                 Navigator.pushNamed(context, Routes.movieDetailsScreen,arguments:{
                   'title':  ApiUtils.formatTitleForMovieResult(movie.title),
                   'voteAverage':ApiUtils.formatVoteAverageForMovieResult(movie.voteAverage),
                   'releaseDate' : ApiUtils.formatReleaseDateWithYearForMovieResult(movie.releaseDate),
-                  'posterPath' : ApiUtils.getPosterImage(movie.posterPath)
+                  'posterPath' : ApiUtils.getPosterImage(movie.posterPath),
+                  'overview' : ApiUtils.formatTitleForMovieResult(movie.overview),
+                  'movieId' : movie.id
                 });
               },
               child: Container(

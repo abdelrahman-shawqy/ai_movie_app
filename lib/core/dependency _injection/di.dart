@@ -29,9 +29,9 @@ getIt.registerLazySingleton<Dio>(() =>Dio(
       'Authorization': 'Bearer $accessTokenAuth',
       'accept':'application/json'
     },
-    sendTimeout:const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 10),
-    connectTimeout: const Duration(seconds: 10),
+    sendTimeout:const Duration(seconds: 30),
+    receiveTimeout: const Duration(seconds: 30),
+    connectTimeout: const Duration(seconds: 30),
   )
 ) ,);
 getIt.registerLazySingleton<ApiHelper>(() => ApiHelper(getIt<Dio>()),);

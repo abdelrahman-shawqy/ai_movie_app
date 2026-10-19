@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/dependency%20_injection/di.dart';
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/utils/api_utils.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
@@ -49,34 +50,11 @@ class DefaultSearchTap extends StatelessWidget {
                 builder: (BuildContext context, state) {
                   switch (state) {
                     case TrendingMoviesLoading():
-                      return Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      );
+                      return trendingMoviesLoading();
                     case TrendingMoviesSuccess():
-                      final movie =state.trendingMovieResultModel[3] ;
-                      return CardCustomWidget(
-                        indexList: 3,
-                        backdropPath:
-                        ApiUtils.getBackDropImage(movie.backdropPath)
-                            ,
-                        voteAverage: movie
-                            .voteAverage
-                            .toStringAsFixed(1),
-                        title: movie.title,
-                        genreIds: ApiUtils.getGenreName(
-                          movie.genreIds,
-                        ),
-                        releaseDate:
-                            (state.trendingMovieResultModel[3].releaseDate)
-                                .substring(0, 4),
-                      );
+                      return trendingMoviesSuccess(state, context);
                     case TrendingMoviesError():
-                      return Center(
-                        child: Text(
-                          state.errorMessage,
-                          style: AppTextStyle.h5Medium500S14,
-                        ),
-                      );
+                      return trendingMoviesError(state);
                   }
                 },
               ),
@@ -102,6 +80,55 @@ class DefaultSearchTap extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget trendingMoviesLoading() {
+    return Center(child: CircularProgressIndicator(color: Colors.white));
+  }
+
+  Widget trendingMoviesSuccess(
+    TrendingMoviesSuccess state,
+    BuildContext context,
+  ) {
+    final movie = state.trendingMovieResultModel[3];
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          Routes.movieDetailsScreen,
+          arguments: {
+            'title': ApiUtils.formatTitleForMovieResult(movie.title),
+            'voteAverage': ApiUtils.formatVoteAverageForMovieResult(
+              movie.voteAverage,
+            ),
+            'releaseDate': ApiUtils.formatReleaseDateWithYearForMovieResult(
+              movie.releaseDate,
+            ),
+            'posterPath': ApiUtils.getPosterImage(movie.posterPath),
+            'overview': ApiUtils.formatTitleForMovieResult(movie.overview),
+          },
+        );
+      },
+      child: CardCustomWidget(
+        indexList: 3,
+        overview: ApiUtils.formatTitleForMovieResult(movie.overview),
+        posterPath: ApiUtils.getBackDropImage(movie.posterPath),
+        voteAverage: movie.voteAverage.toStringAsFixed(1),
+        title: movie.title,
+        movieId: movie.id,
+        genreIds: ApiUtils.getGenreName(movie.genreIds),
+        releaseDate: (state.trendingMovieResultModel[3].releaseDate).substring(
+          0,
+          4,
+        ),
+      ),
+    );
+  }
+
+  Widget trendingMoviesError(TrendingMoviesError state) {
+    return Center(
+      child: Text(state.errorMessage, style: AppTextStyle.h5Medium500S14),
     );
   }
 

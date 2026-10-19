@@ -1,21 +1,23 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
+import 'package:ai_movie_app/features/movie_detail/presentation/utils/ui_utils.dart';
 import 'package:ai_movie_app/features/movie_detail/presentation/widget/app_bar_movie_details.dart';
 import 'package:ai_movie_app/features/movie_detail/presentation/widget/rating_widget.dart';
+import 'package:ai_movie_app/features/movie_detail/presentation/widget/share_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CardMovieDetails extends StatelessWidget {
-  const CardMovieDetails({super.key,required this.title,required this.voteAverage,required this.releaseDate,required this.posterPath});
+  const CardMovieDetails({super.key,required this.title,required this.voteAverage,required this.releaseDate,required this.posterPath,required this.movieId});
   final String title ;
   final String voteAverage ;
   final String releaseDate ;
   final String posterPath ;
-  static const String ppppp = 'assets/images/test.png';
+  final int movieId ;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -149,7 +151,20 @@ class CardMovieDetails extends StatelessWidget {
                         color:  AppColors.mainColor,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.open_in_new, color:  AppColors.primaryBlueAccent, size: 24),
+                      child: GestureDetector(
+                        onTap: (){
+                          showDialog(context: context, builder: (context){
+                            return Dialog(child: ShareWidget(
+                              onFacebookTap: (){},
+                              onInstagramTap: (){},
+                              onMessengerTap: (){},
+                              onClose: ()=>Navigator.pop(context),
+                              onSendTap:()async{
+                              await UiUtils.shareMovieLink(movieId: movieId,movieTitle:title);
+                            } ,));
+                          });
+                        },
+                          child: const Icon(Icons.open_in_new, color:  AppColors.primaryBlueAccent, size: 24)),
                     ),
                   ],
                 ),
@@ -160,4 +175,5 @@ class CardMovieDetails extends StatelessWidget {
       ],
     );
   }
+
 }

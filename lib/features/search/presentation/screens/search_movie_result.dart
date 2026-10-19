@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/constants/app_images.dart';
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/core/utils/api_utils.dart';
@@ -46,10 +47,12 @@ class SearchMovieResult extends StatelessWidget {
         return CardCustomWidget(
           title:ApiUtils.formatTitleForMovieResult(movie.title) ,
           voteAverage:ApiUtils.formatVoteAverageForMovieResult(movie.voteAverage),
-          backdropPath: ApiUtils.getPosterImage(movie.posterPath??''),
+          posterPath: ApiUtils.getPosterImage(movie.posterPath??''),
           genreIds:ApiUtils.getGenreName(movie.genreIds),
           indexList: index,
           releaseDate:ApiUtils.formatReleaseDateWithYearForMovieResult(movie.releaseDate),
+          overview: ApiUtils.formatTitleForMovieResult(movie.overview),
+          movieId: movie.id,
         );
       },
       separatorBuilder: (context, index) => SizedBox(height: 16),

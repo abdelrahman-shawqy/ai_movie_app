@@ -66,10 +66,13 @@ class SearchActorResult extends StatelessWidget {
         itemBuilder:(context,index)=> CardCustomWidget(
           indexList: index,
           title:ApiUtils.formatTitleForMovieResult(castList[index].title??''),
-          backdropPath: ApiUtils.getPosterImage(castList[index].backdropPath??""),
+          posterPath: ApiUtils.getPosterImage(castList[index].backdropPath??""),
           releaseDate: ApiUtils.formatReleaseDateWithYearForMovieResult(castList[index].releaseDate??''),
           genreIds: ApiUtils.getGenreName(castList[index].genreIds),
           voteAverage:ApiUtils.formatVoteAverageForMovieResult(castList[index].voteAverage) ,
+          overview: ApiUtils.formatTitleForMovieResult(castList[index].overview),
+          movieId: castList[index].id,
+
         ),
         separatorBuilder:(context,index)=> SizedBox(height: 16,),
         itemCount: castList.length,
