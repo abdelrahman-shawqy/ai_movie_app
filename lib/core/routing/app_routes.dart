@@ -8,8 +8,13 @@ import 'package:ai_movie_app/features/auth/sign_up/screens/sign_up_screen.dart';
 import 'package:ai_movie_app/features/home/presentation/screens/home_main_screen.dart';
 import 'package:ai_movie_app/features/movie_detail/presentation/screens/movie_details_screen.dart';
 import 'package:ai_movie_app/features/onboarding/screens/onboarding__screen.dart';
+import 'package:ai_movie_app/features/person/presentation/screens/language_screen.dart';
+import 'package:ai_movie_app/features/person/presentation/screens/notification_screen.dart';
 import 'package:ai_movie_app/features/splash_screen/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/person/presentation/screens/edit_profile_screen.dart';
+import '../../features/person/presentation/screens/privacy_policy_screen.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -32,6 +37,14 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const CreateNewPassword());
       case Routes.homeMainScreen:
         return MaterialPageRoute(builder: (_) => const HomeMainScreen());
+        case Routes.languageScreen:
+        return MaterialPageRoute(builder: (_) => const LanguageScreen());
+        case Routes.notificationScreen:
+        return MaterialPageRoute(builder: (_) => const NotificationScreen());
+        case Routes.editProfileScreen:
+        return MaterialPageRoute(builder: (_) => const EditProfileScreen());
+        case Routes.privacyPolicyScreen:
+        return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
       case Routes.movieDetailsScreen:
         final argument=setting.arguments as Map<String,dynamic>  ;
         return MaterialPageRoute(
