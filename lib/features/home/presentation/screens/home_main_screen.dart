@@ -3,7 +3,7 @@ import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/features/download/presentation/screens/download_tab.dart';
 import 'package:ai_movie_app/features/home/presentation/screens/home_tab.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/selected_icon.dart';
-import 'package:ai_movie_app/features/person/presentation/screens/person_tab.dart';
+import 'package:ai_movie_app/features/person/presentation/screens/profile_screen.dart';
 import 'package:ai_movie_app/features/search/presentation/screens/search_tab.dart';
 import 'package:flutter/material.dart';
 

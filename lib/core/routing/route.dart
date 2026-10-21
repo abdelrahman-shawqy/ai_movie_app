@@ -9,5 +9,9 @@ abstract class Routes{
   static const String createNewPassword = 'createNewPassword';
   static const String homeMainScreen = 'homeMainScreen';
   static const String movieDetailsScreen = 'movieDetailsScreen';
+  static const String languageScreen = 'languageScreen';
+  static const String notificationScreen = 'notificationScreen';
+  static const String editProfileScreen = 'editProfileScreen';
+  static const String privacyPolicyScreen = 'privacyPolicyScreen';
 
 }

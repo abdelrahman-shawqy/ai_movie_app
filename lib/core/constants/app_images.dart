@@ -23,4 +23,6 @@ class AppImages{
   static const String unavailableErrorImage = "assets/images/unavailable_error_image.png";
   static const String searchCanNotBeFound = "assets/images/search_can_not_be_found.png";
   static const String profilePic = "assets/images/profile_pic.jpg";
+  static const String iconEdit = "assets/images/icon_edit.png";
+  static const String questionIconIm = "assets/images/question_icon_im.png";
 }

@@ -127,4 +127,37 @@ class AppTextStyle{
     letterSpacing:0.12,
 
   );
+
+  static TextStyle get  h4Semibold600S16 => GoogleFonts.montserrat(
+    color: AppColors.primaryBlueAccent,
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    height:1,
+    letterSpacing:0.12,
+
+  );
+  static TextStyle get  poppinsRegular400S16primaryBlueAccent => GoogleFonts.montserrat(
+    color: AppColors.primaryBlueAccent,
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    height:1,
+    letterSpacing:0.12,
+
+  );
+  static TextStyle get  poppinsRegular400S16whiteColor => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    height:1,
+    letterSpacing:0.12,
+
+  );
+  static TextStyle get  h5Semibold600S14Whit => GoogleFonts.montserrat(
+    color: AppColors.whiteColor,
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    height:1,
+    letterSpacing:0.12,
+
+  );
 }
