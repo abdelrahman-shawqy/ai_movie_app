@@ -13,6 +13,7 @@ import 'package:ai_movie_app/features/person/presentation/screens/notification_s
 import 'package:ai_movie_app/features/splash_screen/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/ai_chat_bot/presentation/screens/ai_screen.dart';
 import '../../features/person/presentation/screens/edit_profile_screen.dart';
 import '../../features/person/presentation/screens/privacy_policy_screen.dart';
 
@@ -45,6 +46,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const EditProfileScreen());
         case Routes.privacyPolicyScreen:
         return MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen());
+        case Routes.aiScreen:
+        return MaterialPageRoute(builder: (_) => const AiScreen());
       case Routes.movieDetailsScreen:
         final argument=setting.arguments as Map<String,dynamic>  ;
         return MaterialPageRoute(

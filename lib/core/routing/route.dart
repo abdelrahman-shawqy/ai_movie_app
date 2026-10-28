@@ -13,5 +13,6 @@ abstract class Routes{
   static const String notificationScreen = 'notificationScreen';
   static const String editProfileScreen = 'editProfileScreen';
   static const String privacyPolicyScreen = 'privacyPolicyScreen';
+  static const String aiScreen = 'aiScreen';
 
 }
