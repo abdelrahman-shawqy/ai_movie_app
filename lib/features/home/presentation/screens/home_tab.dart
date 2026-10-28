@@ -1,4 +1,5 @@
 import 'package:ai_movie_app/core/dependency%20_injection/di.dart';
+import 'package:ai_movie_app/core/routing/route.dart';
 import 'package:ai_movie_app/core/theme/app_text_styles.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/features/home/presentation/controller/most_popular_movies/most_popular_movies_cubit.dart';
@@ -21,6 +22,21 @@ class HomeTab extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.mainColor,
+      floatingActionButton: GestureDetector(
+        onTap: (){
+          Navigator.pushNamed(context, Routes.aiScreen);
+        },
+        child: Container(
+          height: 80,
+          width: 80,
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlueAccent,
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Icon(Icons.add,color: Colors.white,size: 35,),
+        ),
+      ),
+
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
