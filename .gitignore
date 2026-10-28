@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Secret environment variables
+.env
+
+# Generated Envied file
+lib/env/env.g.dart
