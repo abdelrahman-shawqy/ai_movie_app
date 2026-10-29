@@ -8,9 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'firebase_options.dart';
 
+
 void main() async {
-  configureDependencies();
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.homeMainScreen,
+      initialRoute: Routes.splashScreen,
       onGenerateRoute:AppRoutes.onGenerateRoute ,
     );
   }
