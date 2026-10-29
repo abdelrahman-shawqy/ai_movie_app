@@ -14,4 +14,20 @@ class ApiHelper {
 
     }
   }
+
+  Future<Response> postData({
+    required String endPoint,
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    return await _dio.post(
+      endPoint,
+      data: data,
+      queryParameters: (queryParameters == null || queryParameters.isEmpty)
+          ? null
+          : queryParameters,
+      options: options,
+    );
+  }
 }
