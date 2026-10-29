@@ -3,7 +3,7 @@ import 'package:ai_movie_app/features/ai_chat_bot/presentation/widgets/custom_te
 import 'package:ai_movie_app/features/person/presentation/widgets/screen_header.dart';
 import 'package:flutter/material.dart';
 
-class AiScreen extends StatefulWidget {
+  class AiScreen extends StatefulWidget {
   const AiScreen({super.key});
 
   @override

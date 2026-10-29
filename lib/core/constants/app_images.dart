@@ -8,7 +8,7 @@ class AppImages{
   static const String arrowRightIcon = "assets/images/arrow_right_icon.png";
   static const String logoSignUpLogin = "assets/images/logo_signup_login.png";
   static const String googleIcon = "assets/images/google_Icon.png";
-  static const String facebookIcon = "assets/images/facebook_Icon.png";
+  static const String facebookIcon = "assets/images/facebook_icon.png";
   static const String iconBack = "assets/images/icon_back.png";
   static const String downloadIcon = "assets/images/download_icon.png";
   static const String homeIcon = "assets/images/home_icon.png";

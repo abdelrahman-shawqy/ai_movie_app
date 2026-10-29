@@ -63,7 +63,6 @@ class DefaultFirebaseOptions {
     projectId: 'ai-movie-app-600c3',
     storageBucket: 'ai-movie-app-600c3.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDweHc3v7W_vei18J4IIh1ppxwYWudJ36g',
     appId: '1:805323873920:ios:14a58e62fd0f808bb51065',
