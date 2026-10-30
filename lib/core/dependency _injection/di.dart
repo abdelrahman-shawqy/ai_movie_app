@@ -1,5 +1,7 @@
 import 'package:ai_movie_app/core/network/api_helper.dart';
 import 'package:ai_movie_app/core/network/constant.dart';
+import 'package:ai_movie_app/env/env.dart';
+import 'package:ai_movie_app/features/ai_chat_bot/data/remote_data_source/ai_remote_data_source.dart';
 import 'package:ai_movie_app/features/home/data/remote_data_source/remote_home_data_source.dart';
 import 'package:ai_movie_app/features/home/data/remote_data_source/remote_home_data_source_impl.dart';
 import 'package:ai_movie_app/features/home/data/remote_repository_impl/remote_home_repository_impl.dart';
@@ -18,6 +20,12 @@ import 'package:ai_movie_app/features/search/presentation/controllers/search_by_
 import 'package:ai_movie_app/features/search/presentation/controllers/search_by_movie/search_by_movie_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../features/ai_chat_bot/data/remote_data_source/ai_remote_data_source_impl.dart';
+import '../../features/ai_chat_bot/data/remote_repository_impl/ai_repository_impl.dart';
+import '../../features/ai_chat_bot/domain/remote_repository/ai_repository.dart';
+import '../../features/ai_chat_bot/domain/use_case/send_message_use_case.dart';
+import '../../features/ai_chat_bot/presentation/controller/ai_cubit.dart';
 
 
 final getIt = GetIt.instance;
@@ -48,5 +56,21 @@ getIt.registerLazySingleton<SearchUseCase>(()=>SearchUseCase(getIt<RemoteSearchR
 getIt.registerFactory<SearchByMovieCubit>(()=>SearchByMovieCubit(getIt<SearchUseCase>()));
 getIt.registerFactory<SearchByActorCubit>(()=>SearchByActorCubit(getIt<SearchUseCase>()));
 getIt.registerFactory<PersonCreditsCubit>(()=>PersonCreditsCubit(getIt<SearchUseCase>()));
+
+getIt.registerLazySingleton<Dio>(() => Dio(BaseOptions(
+  baseUrl: 'https://generativelanguage.googleapis.com/v1beta/',
+  headers: {
+    'x-goog-api-key': Env.geminiApiKey,
+    'Content-Type': 'application/json',
+  },
+  sendTimeout: const Duration(seconds: 60),
+  receiveTimeout: const Duration(seconds: 60),
+  connectTimeout: const Duration(seconds: 30),
+),), instanceName: 'geminiDio');
+getIt.registerLazySingleton<ApiHelper>(() => ApiHelper(getIt<Dio>(instanceName: 'geminiDio')), instanceName: 'geminiApiHelper');
+getIt.registerLazySingleton<AiRemoteDataSource>(() => AiRemoteDataSourceImpl(getIt<ApiHelper>(instanceName: 'geminiApiHelper')));
+getIt.registerLazySingleton<AiRepository>(() => AiRepositoryImpl(getIt<AiRemoteDataSource>()));
+getIt.registerLazySingleton<SendMessageUseCase>(() => SendMessageUseCase(getIt<AiRepository>()));
+getIt.registerFactory<AiCubit>(() => AiCubit(getIt<SendMessageUseCase>()));
 
 }
