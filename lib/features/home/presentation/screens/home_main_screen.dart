@@ -1,10 +1,10 @@
 import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
-import 'package:ai_movie_app/features/download/presentation/screens/download_tab.dart';
 import 'package:ai_movie_app/features/home/presentation/screens/home_tab.dart';
 import 'package:ai_movie_app/features/home/presentation/widgets/selected_icon.dart';
 import 'package:ai_movie_app/features/person/presentation/screens/profile_screen.dart';
 import 'package:ai_movie_app/features/search/presentation/screens/search_tab.dart';
+import 'package:ai_movie_app/features/wishlist/presentation/screens/wishlist_tap.dart';
 import 'package:flutter/material.dart';
 
 class HomeMainScreen extends StatefulWidget {
@@ -28,9 +28,9 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
 
     ),
     NavigationDestination(
-      icon: Image.asset(AppImages.downloadIcon),
+      icon: Icon(Icons.favorite_border,size: 24,color: AppColors.grayColor,),
       label: 'Download',
-      selectedIcon: SelectedIcon(label: 'Download',imageIcon:AppImages.downloadIcon,),
+      selectedIcon: SelectedIcon(label: 'Wishlist',imageIcon: '',),
 
     ),
     NavigationDestination(
@@ -40,7 +40,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
 
     ),
   ];
-  final List <Widget> Tabs = [ HomeTab(),SearchTab(),DownloadTab(),PersonTab()] ;
+  final List <Widget> Tabs = [ HomeTab(),SearchTab(),Wishlist(),PersonTab()] ;
   int selectedIndex = 0;
 
   @override

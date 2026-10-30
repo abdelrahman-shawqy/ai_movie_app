@@ -21,7 +21,7 @@ class SelectedIcon extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(imageIcon,color: AppColors.primaryBlueAccent,),
+            imageIcon.isEmpty?Icon(Icons.favorite,size: 24,color: AppColors.primaryBlueAccent):Image.asset(imageIcon,color: AppColors.primaryBlueAccent,),
             SizedBox(
               width: 6,
             ),
