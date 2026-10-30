@@ -25,4 +25,5 @@ class AppImages{
   static const String profilePic = "assets/images/profile_pic.jpg";
   static const String iconEdit = "assets/images/icon_edit.png";
   static const String questionIconIm = "assets/images/question_icon_im.png";
+  static const String playMovie = "assets/images/play_movie.png";
 }

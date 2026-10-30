@@ -1,5 +1,7 @@
+import 'package:ai_movie_app/core/constants/app_images.dart';
 import 'package:ai_movie_app/core/theme/colors.dart';
 import 'package:ai_movie_app/features/person/presentation/widgets/screen_header.dart';
+import 'package:ai_movie_app/features/wishlist/presentation/widgets/wishlist_card.dart';
 import 'package:flutter/material.dart';
 
 class Wishlist extends StatelessWidget {
@@ -15,8 +17,11 @@ class Wishlist extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
                 children: [
-                  ScreenHeader(title: 'Wishlist',)
+                  ScreenHeader(title: 'Wishlist',),
+                  SizedBox(height: 18,),
+                  WishlistCard(),
                 ],
+
 
             ),
           ),
